@@ -444,6 +444,7 @@ ggplot(temp_df_long, aes(x = Température, y = Mois, fill = after_stat(x))) +
     colors = c("#440154", "#414487", "#2A788E", "#22A884", "#FDE725"),
     name = "Température (°C)"
   ) +
+  scale_y_discrete(expand = expansion(mult = c(0.01, 0.05))) +
   coord_cartesian(xlim = c(-5, 30)) +  # Limite l'axe X pour retirer les valeurs inutiles (ex. -10)
   labs(
     title = "Distribution des Températures Mensuelles en France (2004-2023)",
@@ -455,19 +456,28 @@ ggplot(temp_df_long, aes(x = Température, y = Mois, fill = after_stat(x))) +
   theme(
     panel.background = element_rect(fill = "#2C2C2C", color = NA),
     plot.background = element_rect(fill = "#2C2C2C", color = NA),
-    plot.title = element_text(size = 22, face = "bold", hjust = 0.5, color = "white"),
-    plot.subtitle = element_text(size = 16, hjust = 0.5, color = "white"),
+    plot.title = element_text(
+      size = 22, face = "bold", hjust = 0.5, color = "white",
+      margin = margin(b = 5) # Aumenta a margem abaixo do título
+    ),
+    plot.subtitle = element_text(
+      size = 18, hjust = 0.5, color = "white",
+      margin = margin(b = 20) # Aumenta a margem abaixo do subtítulo
+    ),
     axis.title = element_text(face = "bold", size = 14, color = "white"),
-    axis.text = element_text(size = 16, color = "white"),
-    legend.title = element_text(size = 16, face = "bold", color = "white"),
-    legend.text = element_text(size = 14, color = "white"),
+    axis.text = element_text(size = 18, color = "white"),
+    legend.title = element_text(size = 20, face = "bold", color = "white"), 
+    legend.text = element_text(size = 18, color = "white"),
     legend.background = element_rect(fill = "#2C2C2C", color = NA),
-    legend.position = "right"
+    legend.position = "right",
+    plot.margin = margin(t = 20, r = 10, b = 10, l = 10), 
+    plot.title.position = "plot" 
   )
 
 # Sauvegarder le graphique
 ggsave(filename = stringr::str_glue("{PLOT_FOLDER}/Ridgeline_Temp_Mensuelles.png"),
        width = 14, height = 10, dpi = 300, bg = "#2C2C2C")
+
 
 
 ```
@@ -1096,34 +1106,47 @@ temp_data_annual <- temp_data_annual %>%
 
 # Graphique avec facettes géographiques et valeurs des pentes 
 ggplot(temp_data_annual, aes(x = Année, y = Temp_Moyenne_Region, group = Région)) +
-  geom_point(color = "orange", size = 3) +                         
-  geom_smooth(method = "lm", formula = y ~ x, color = "cyan", se = FALSE, linewidth = 1.5) +
-  facet_wrap(~ Localisation + Région, ncol = 2) +                  
+  geom_point(color = "orange", size = 3) +  # Points représentant les données annuelles                        
+  geom_smooth(method = "lm", formula = y ~ x, color = "cyan", se = FALSE, linewidth = 1.5) +  # Tendance linéaire
+  facet_wrap(~ Localisation + Région, ncol = 2) +  # Diviser le graphique par régions (facettes)
   geom_text(
     aes(
-      x = min(Année) + 1,  
-      y = max(Temp_Moyenne_Region, na.rm = TRUE) - 0.5,  
-      label = paste0("Slope: ", round(Slope, 3), " °C/an")
+      x = min(Année) + 1,  # Position horizontale du texte
+      y = max(Temp_Moyenne_Region, na.rm = TRUE) - 0.5,  # Position verticale du texte
+      label = paste0("Slope: ", round(Slope, 3), " °C/an")  # Texte affichant la pente
     ),
-    color = "#b0ad00", size = 6, fontface = "bold", hjust = 0
+    color = "#b0ad00", size = 6, fontface = "bold", hjust = 0  # Style du texte
   ) +
   labs(
-    title = "Évolution des Températures Moyennes par Région (2004-2023)",
-    subtitle = "Analyse linéaire des tendances avec valeurs des pentes",
-    x = "Année",
-    y = "Température Moyenne (°C)"
+    title = "Évolution des Températures Moyennes par Région (2004-2023)",  # Titre principal
+    subtitle = "Analyse linéaire des tendances avec valeurs des pentes",  # Sous-titre
+    x = "Année",  # Titre de l'axe X
+    y = "Température Moyenne (°C)"  # Titre de l'axe Y
   ) +
-  theme_dark(base_size = 16) +
+  theme_dark(base_size = 16) +  # Thème sombre avec base 16 pour la taille du texte
   theme(
-    plot.title = element_text(size = 22, face = "bold", hjust = 0.5, color = "white"),
-    plot.subtitle = element_text(size = 16, hjust = 0.5, color = "white"),
-    axis.text.x = element_text(hjust = 1, color = "white"),
-    axis.text.y = element_text(color = "white"),
-    strip.text = element_text(face = "bold", size = 14, color = "white"),
-    panel.grid.major = element_line(color = "#444444"),
-    panel.background = element_rect(fill = "#2C2C2C"),
-    plot.background = element_rect(fill = "#2C2C2C"),
-    panel.grid.minor = element_blank(),
+    # Titre et sous-titre
+    plot.title = element_text(size = 24, face = "bold", hjust = 0.5, color = "white"),
+    plot.subtitle = element_text(size = 20, hjust = 0.5, color = "white", margin = margin(b = 20)),
+    
+    # Titres des axes - espacement ajusté
+    axis.title.x = element_text(size = 20, face = "bold", color = "white", margin = margin(t = 10)),
+    axis.title.y = element_text(size = 20, face = "bold", color = "white", margin = margin(r = 20)), # Plus d'espacement à droite
+    
+    # Texte des axes
+    axis.text.x = element_text(size = 14, color = "white", hjust = 1),
+    axis.text.y = element_text(size = 14, color = "white"),
+    
+    # Titres des facettes
+    strip.text = element_text(face = "bold", size = 19, color = "white"),
+    
+    # Fond du graphique et grilles
+    panel.grid.major = element_line(color = "#444444"),  # Grilles principales
+    panel.background = element_rect(fill = "#2C2C2C"),  # Fond des panneaux (facettes)
+    plot.background = element_rect(fill = "#2C2C2C"),  # Fond global
+    panel.grid.minor = element_blank(),  # Retirer les petites grilles
+    
+    # Marges extérieures du graphique
     plot.margin = margin(10, 10, 10, 10)
   )
 
@@ -1135,7 +1158,6 @@ ggplot(temp_data_annual, aes(x = Année, y = Temp_Moyenne_Region, group = Régio
     Toutes les régions montrent une **augmentation des températures moyennes** sur la période étudiée. Les pentes positives confirment une tendance linéaire ascendante.
 
 2.  **Régions avec les Pentes les Plus Élevées :**
-
     -   La région **Auvergne-Rhône-Alpes** présente la **pente la plus forte** avec **0.089 °C/an**, indiquant un réchauffement plus marqué.
     -   Les régions comme **Bourgogne-Franche-Comté** et **Provence-Alpes-Côte d'Azur** affichent également des pentes élevées (**0.084 °C/an**).
 
