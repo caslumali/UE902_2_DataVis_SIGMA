@@ -17,8 +17,9 @@ execute:
 
 Cette page interactive constitue le projet final de l'UE902_2 *Visualisation de Données* du **M2 SIGMA** (Université Toulouse 2 Jean Jaurès / ENSAT-INP).
 
-Les données exploitées proviennent des sources suivantes :\
-- Le jeu de données climatiques [**TerraClimate**](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_TERRACLIMATE), couvrant les **20 dernières années** (2004 à 2023).
+Les données exploitées proviennent des sources suivantes :
+
+-   Le jeu de données climatiques [**TerraClimate**](https://developers.google.com/earth-engine/datasets/catalog/IDAHO_EPSCOR_TERRACLIMATE), couvrant les **20 dernières années** (2004 à 2023).
 
 -   Le **découpage administratif de la France** issu de la base [**ADMIN EXPRESS**](https://geoservices.ign.fr/adminexpress), fournie par l'**IGN (Institut National de l'Information Géographique et Forestière)**.
 
@@ -208,7 +209,6 @@ cat("\nPré-traitement des rasters terminé avec succès !\n")
 
 # **Carte des températures annuelles moyennes en France de 2004 à 2023**
 
-**Explication :**\
 La carte animée ci-dessous présente l'évolution des **températures moyennes annuelles** en France de **2004 à 2023**. Chaque image représente la **moyenne des 12 mois** pour une année donnée, ce qui permet de visualiser les **changements climatiques** sur deux décennies.
 
 ```{r Calcul de la température annuelle moyenne}
@@ -344,7 +344,6 @@ Les étapes clés du traitement des données incluent :
 
 # **Ridgeline Plot : Températures Mensuelles en France (2004-2023)**
 
-**Explication :**\
 Ce graphique montre la **distribution des températures mensuelles** agrégées sur les **20 dernières années** pour toute la France. Chaque ligne correspond à un mois de l’année (de janvier à décembre), permettant de comparer les distributions mensuelles de manière intuitive.
 
 ```{r Début processus Ridgeline Plot}
@@ -496,8 +495,7 @@ ggsave(filename = stringr::str_glue("{PLOT_FOLDER}/Ridgeline_Temp_Mensuelles.png
     Les valeurs mensuelles ont été moyennées spatialement pour obtenir une série temporelle de températures mensuelles moyennes à l’échelle nationale. Ensuite, les distributions de ces températures (tous pixels et toutes les années confondus) ont été visualisées.
 
 -   **Visualisation (Ridgeline Plot) :**\
-    Ce Ridgeline Plot, réalisé avec **ggplot2** et **ggridges**, montre la densité des températures mensuelles (tous pixels et toutes années confondues) sur un axe horizontal (Température en °C). Chaque ligne correspond à un mois donné, avec la “crête” indiquant la répartition statistique des valeurs de température pour ce mois sur 20 ans. 
-    La position verticale des lignes ne reflète pas une mesure numérique, mais sert simplement à séparer visuellement les distributions mensuelles. Ainsi, on peut facilement comparer les formes, les étendues et les modes des distributions entre différents mois.
+    Ce Ridgeline Plot, réalisé avec **ggplot2** et **ggridges**, montre la densité des températures mensuelles (tous pixels et toutes années confondues) sur un axe horizontal (Température en °C). Chaque ligne correspond à un mois donné, avec la “crête” indiquant la répartition statistique des valeurs de température pour ce mois sur 20 ans. La position verticale des lignes ne reflète pas une mesure numérique, mais sert simplement à séparer visuellement les distributions mensuelles. Ainsi, on peut facilement comparer les formes, les étendues et les modes des distributions entre différents mois.
 
 -   **Palette de Couleurs :**\
     Une échelle de couleurs dégradée, allant du violet/bleu (températures plus froides) au vert/jaune (températures plus chaudes), a été utilisée pour faciliter la lecture et l’interprétation visuelle.
@@ -505,8 +503,6 @@ ggsave(filename = stringr::str_glue("{PLOT_FOLDER}/Ridgeline_Temp_Mensuelles.png
 ------------------------------------------------------------------------
 
 # **Carte des anomalies de températures annuelles en France (2004-2023)**
-
-**Explication :**\
 
 La carte animée ci-dessous présente les **anomalies de températures annuelles** en France entre **2004 et 2023**. Les anomalies sont calculées en comparant les températures moyennes annuelles à une **moyenne de référence** sur la période complète (2004-2023). Cette approche permet de **détecter et visualiser** les écarts par rapport à la normale climatique.
 
@@ -698,8 +694,6 @@ De plus, l’analyse des **tendances saisonnières** illustrées ci-dessous perm
 
 # **Analyse des tendances saissonières**
 
-**Explication :**
-
 Le graphique ci-dessous présente l’**évolution des anomalies de température saisonnières** en France entre **2004 et 2023**. Les anomalies sont calculées en comparant les températures mensuelles à une **moyenne de référence** pour chaque mois sur la période complète (**2004-2023**). Les mois sont ensuite regroupés en **quatre saisons climatiques** :
 
 -   **Hiver** : Décembre, Janvier, Février
@@ -853,10 +847,11 @@ Les étapes clés du traitement des données incluent :
 
 # **Scatter Plot de l'Amplitude Thermique par Région**
 
-**Explication :**\
-Le graphique de dispersion ci-dessous présente la **relation entre les températures maximales et minimales moyennes annuelles** pour chaque **région française** entre **2004 et 2023**. Chaque point représente une **année donnée** dans une région spécifique, tandis que la couleur des points permet de distinguer facilement les différentes régions.
+Le graphique de dispersion ci-dessous illustre la **relation entre les températures maximales et minimales moyennes annuelles** pour chaque **région française** entre **2004 et 2023**. Chaque point représente une **année donnée** dans une région spécifique, tandis que la **couleur des points** permet de distinguer les régions françaises et que **la forme des points** différencie les **deux décennies** analysées :\
+- **Cercle** : Années **2004-2013**\
+- **Triangle** : Années **2014-2023**
 
-Ce type de visualisation met en évidence les **variations climatiques** régionales et permet d'analyser l'**amplitude thermique** sur deux décennies.
+Cette représentation visuelle facilite l'analyse des **évolutions climatiques** régionales et permet de mettre en évidence les différences d'**amplitude thermique** entre les deux décennies.
 
 ```{r Début du Scatter Plot}
 #| echo: false
@@ -948,6 +943,11 @@ cat("Les résultats ont été sauvegardés dans 'results/Temp_Max_Min_Regions.cs
 # Charger les résultats extraits ----
 temp_region <- read.csv("results/Temp_Max_Min_Regions.csv")
 
+# Ajouter une colonne 'Décennie' pour différencier les années
+# Si l'année est inférieure ou égale à 2013, elle appartient à "2004-2013"
+# Sinon, elle appartient à "2014-2023"
+temp_region$Décennie <- ifelse(temp_region$Année <= 2013, "2004-2013", "2014-2023")
+
 # Filtrer les valeurs NA ----
 temp_region <- temp_region %>%
   dplyr::filter(!is.na(Temp_Max) & !is.na(Temp_Min))
@@ -958,25 +958,36 @@ couleurs_regions <- c(
   "#a6761d", "#666666", "#1f78b4", "#33a02c", "#fb9a99", "#b15928", "#fdbf6f"
 )
 
-p <- ggplot(temp_region, aes(x = Temp_Min, y = Temp_Max, color = Région)) +
-  geom_point(alpha = 0.8, size = 3) +  # Points plus lisibles
-  scale_color_manual(values = couleurs_regions) +  # Utilisation de couleurs uniques
+# Création du scatter plot avec forme différente pour chaque décennie ----
+p <- ggplot(temp_region, aes(x = Temp_Min, y = Temp_Max, color = Région, shape = Décennie)) +
+  geom_point(alpha = 0.8, size = 4) +  # Points avec transparence et taille optimisée
+  scale_color_manual(values = couleurs_regions) +  # Palette de couleurs pour les régions
+  scale_shape_manual(values = c(16, 17)) +  # Formes : cercle (16) pour 2004-2013 et triangle (17) pour 2014-2023
   labs(
     title = "Relation entre Températures Maximales et Minimales (2004-2023)",
-    subtitle = "Chaque point représente une région pour une année donnée",
+    subtitle = "Différenciation des décennies par la forme des points",
     x = "Température Minimale Moyenne (°C)",
     y = "Température Maximale Moyenne (°C)",
-    color = "Région"
+    color = "Région",  
+    shape = "Décennie"  
   ) +
+  guides(
+    shape = guide_legend(override.aes = list(color = "white", size = 4)) 
+  ) + 
   theme_minimal(base_size = 14) +
   theme(
-    plot.background = element_rect(fill = "#2C2C2C", color = NA),  # Fond Darkly
+    plot.background = element_rect(fill = "#2C2C2C", color = NA),  
     panel.background = element_rect(fill = "#2C2C2C", color = NA),
-    panel.grid.major = element_line(color = "#444444", size = 0.3),
-    panel.grid.minor = element_blank(),
+    plot.margin = margin(t = 20, r = 10, b = 20, l = 10),
+    panel.grid.major = element_line(color = "#626262", linewidth = 0.3),
+    panel.grid.minor = element_line(color = "#626262", linewidth = 0.2),
     plot.title = element_text(size = 20, face = "bold", hjust = 0.5, color = "white"),
-    plot.subtitle = element_text(size = 14, hjust = 0.5, color = "white"),
-    axis.title = element_text(face = "bold", size = 16, color = "white"),
+    plot.subtitle = element_text(size = 18, hjust = 0.5, color = "white", margin = margin(b = 20)),
+    
+    # Ajuster les titres des axes
+    axis.title.x = element_text(size = 18, face = "bold", color = "white", margin = margin(t = 10)),
+    axis.title.y = element_text(size = 18, face = "bold", color = "white", margin = margin(r = 15)),
+    
     axis.text = element_text(size = 14, color = "white"),
     legend.title = element_text(size = 12, face = "bold", color = "white"),
     legend.text = element_text(size = 12, color = "white"),
@@ -985,26 +996,31 @@ p <- ggplot(temp_region, aes(x = Temp_Min, y = Temp_Max, color = Région)) +
   )
 
 # Sauvegarder le graphique ----
-ggsave("results/Scatter_Temp_Max_Min_Fix.png", bg = "#2C2C2C", plot = p, width = 12, height = 8, dpi = 300)
+ggsave("results/Scatter_Temp_Max_Min_Formes.png", bg = "#2C2C2C", plot = p, width = 12, height = 8, dpi = 300)
 
-# Afficher le graphique
+# Afficher le graphique ----
 p
+
 
 ```
 
 ## **Principales Observations :**
 
--   **Corrélation Positive :**\
-    Une relation **linéaire positive** est clairement visible entre les températures maximales et minimales moyennes. Cela signifie que les régions ayant des températures minimales plus élevées tendent également à avoir des températures maximales plus élevées.
+-   **Corrélation Positive Générale :**\
+    Une **relation linéaire positive** est visible entre les températures maximales et minimales moyennes. Les régions ayant des températures minimales plus élevées présentent également des températures maximales plus élevées.
 
--   **Variabilité Régionale :**\
-    Les régions du **sud** de la France, telles que **Provence-Alpes-Côte d'Azur** et **Occitanie**, se démarquent par des températures plus **élevées**, avec des points situés vers la partie supérieure droite du graphique.
+-   **Évolution des Décennies :**
 
--   **Zones Plus Froides :**\
-    Les régions **montagneuses** et **nordiques** (par exemple, **Auvergne-Rhône-Alpes** et **Hauts-de-France**) présentent des températures minimales et maximales plus **basses**, avec des points situés dans la partie inférieure gauche du graphique.
+    -   Les points **triangulaires** (2014-2023) tendent à se décaler légèrement vers la **droite** et vers le **haut** du graphique, suggérant une augmentation des températures minimales et maximales moyennes par rapport à la décennie précédente (2004-2013).
+    -   Cela pourrait indiquer un **réchauffement climatique** dans plusieurs régions françaises.
 
--   **Amplitudes Thermiques Régionales :**\
-    Certaines régions montrent des **écarts importants** entre les températures maximales et minimales, ce qui peut être attribué à des facteurs géographiques et climatiques spécifiques.
+-   **Variabilité Régionale :**
+
+    -   Les régions du **Sud** de la France, comme la **Provence-Alpes-Côte d'Azur** et l'**Occitanie**, montrent des températures **plus élevées**, avec des points situés dans la partie supérieure droite du graphique.
+    -   Les régions **montagneuses** et **nordiques**, telles que **Auvergne-Rhône-Alpes** et les **Hauts-de-France**, présentent des températures plus **basses**, situées dans la partie inférieure gauche.
+
+-   **Comparaison entre Décennies :**\
+    En comparant les deux formes de points, on observe dans certaines régions une **réduction de l'amplitude thermique** (écart entre les températures maximales et minimales), tandis que d'autres montrent une **augmentation notable**, probablement en raison de facteurs climatiques spécifiques.
 
 ## **Détails Techniques :**
 
@@ -1014,16 +1030,19 @@ p
 2.  **Agrégation des Moyennes Régionales :**\
     Les valeurs ont été moyennées au niveau de chaque région pour assurer une analyse cohérente et faciliter la comparaison entre les régions.
 
-3.  **Génération du Scatter Plot :**\
-    Un graphique de dispersion a été créé pour représenter les températures maximales et minimales annuelles. La **palette de couleurs** a été personnalisée pour distinguer clairement les régions, tandis que la transparence des points (alpha) permet d'atténuer la superposition des données.
+3.  **Différenciation des Décennies :**\
+    Une colonne supplémentaire a été ajoutée aux données pour identifier les années appartenant à la première décennie (**2004-2013**) et celles de la seconde décennie (**2014-2023**).
+
+4.  **Visualisation des Données :**
+
+    -   Les **couleurs** des points permettent de distinguer les régions françaises.
+
+    -   Les **formes** des points (cercles et triangles) différencient les deux décennies pour faciliter la comparaison.
 
 ------------------------------------------------------------------------
 
 # **Évolution des Températures Moyennes par Région**
 
-**Explication :**
-
-\
 Ce graphique illustre **l’évolution des températures moyennes annuelles** par région française entre **2004 et 2023**. Chaque facette représente une **région** regroupée par localisation géographique (Nord, Nord-Est, Centre, Sud, Ouest, Sud-Est, Sud-Ouest). Les points orange montrent les températures moyennes observées chaque année, tandis que les lignes cyan indiquent les **tendances linéaires** ajustées via une régression linéaire. La valeur de la pente de chaque tendance, affichée en **jaune**, correspond à l’**augmentation moyenne annuelle des températures** (°C/an).
 
 ```{r Début du processus pour temp moy des régions}
@@ -1169,7 +1188,7 @@ ggplot(temp_data_annual, aes(x = Année, y = Temp_Moyenne_Region, group = Régio
 
 ------------------------------------------------------------------------
 
-### *Interprétation Géographique Approfondie :* 
+### *Interprétation Géographique Approfondie :*
 
 Les différences observées dans les pentes régionales peuvent s’expliquer par divers facteurs géographiques et climatiques. Par exemple, la **proximité de l’océan** tend à modérer les écarts de température, contribuant à des tendances plus stables dans des régions telles que la Bretagne ou la Normandie.
 
