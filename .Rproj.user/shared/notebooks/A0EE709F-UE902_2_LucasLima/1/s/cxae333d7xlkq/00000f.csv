@@ -1,8 +1,0 @@
-"0","#| echo: false"
-"0","#| results: ""hide"""
-"0",""
-"0","# Charger le raster des températures moyennes"
-"0","raster_temp_mean <- rast(stringr::str_glue(""{OUT_FOLDER}/TerraClimate_Mean_stack.tif""))"
-"2","Aviso: ../data_final/TerraClimate_Mean_stack.tif: No such file or directory (GDAL error 4)"
-"2","Erro: [rast] file does not exist: ../data_final/TerraClimate_Mean_stack.tif
-"
