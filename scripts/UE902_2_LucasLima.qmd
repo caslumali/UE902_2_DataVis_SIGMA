@@ -478,13 +478,11 @@ ggplot(temp_df_long, aes(x = Température, y = Mois, fill = after_stat(x))) +
 ggsave(filename = stringr::str_glue("{PLOT_FOLDER}/Ridgeline_Temp_Mensuelles.png"),
        width = 14, height = 10, dpi = 300, bg = "#2C2C2C")
 
-
-
 ```
 
 ## **Principales Observations :**
 
--   **Variabilité Saisonnière Marquée :** Les distributions mensuelles révèlent une nette différence entre les mois d’hiver (avec des températures généralement plus basses) et les mois d’été (températures plus élevées).
+-   **Variabilité Saisonnière Marquée :** Chaque courbe représente la distribution des températures pour l’ensemble du territoire sur l’ensemble des 20 années, pour un mois donné (tous les janvier confondus, tous les février confondus, etc.). Les différences marquées entre les mois d’hiver et d’été révèlent la nette saisonnalité du climat français.
 
 -   **Transitions Progressives entre les Saisons :** L’évolution de la forme et de la position des courbes de densité d’un mois à l’autre montre clairement la progression saisonnière, du froid hivernal à la chaleur estivale, puis la redescente en automne.
 
@@ -498,7 +496,8 @@ ggsave(filename = stringr::str_glue("{PLOT_FOLDER}/Ridgeline_Temp_Mensuelles.png
     Les valeurs mensuelles ont été moyennées spatialement pour obtenir une série temporelle de températures mensuelles moyennes à l’échelle nationale. Ensuite, les distributions de ces températures (tous pixels et toutes les années confondus) ont été visualisées.
 
 -   **Visualisation (Ridgeline Plot) :**\
-    Le Ridgeline Plot, réalisé avec **ggplot2** et **ggridges**, représente la densité des données mensuelles sur un axe horizontal (température), chaque mois étant affiché sur une ligne distincte. La hauteur et la forme de la "crête" indiquent la distribution (densité) des températures.
+    Ce Ridgeline Plot, réalisé avec **ggplot2** et **ggridges**, montre la densité des températures mensuelles (tous pixels et toutes années confondues) sur un axe horizontal (Température en °C). Chaque ligne correspond à un mois donné, avec la “crête” indiquant la répartition statistique des valeurs de température pour ce mois sur 20 ans. 
+    La position verticale des lignes ne reflète pas une mesure numérique, mais sert simplement à séparer visuellement les distributions mensuelles. Ainsi, on peut facilement comparer les formes, les étendues et les modes des distributions entre différents mois.
 
 -   **Palette de Couleurs :**\
     Une échelle de couleurs dégradée, allant du violet/bleu (températures plus froides) au vert/jaune (températures plus chaudes), a été utilisée pour faciliter la lecture et l’interprétation visuelle.
@@ -1158,6 +1157,7 @@ ggplot(temp_data_annual, aes(x = Année, y = Temp_Moyenne_Region, group = Régio
     Toutes les régions montrent une **augmentation des températures moyennes** sur la période étudiée. Les pentes positives confirment une tendance linéaire ascendante.
 
 2.  **Régions avec les Pentes les Plus Élevées :**
+
     -   La région **Auvergne-Rhône-Alpes** présente la **pente la plus forte** avec **0.089 °C/an**, indiquant un réchauffement plus marqué.
     -   Les régions comme **Bourgogne-Franche-Comté** et **Provence-Alpes-Côte d'Azur** affichent également des pentes élevées (**0.084 °C/an**).
 
@@ -1169,11 +1169,11 @@ ggplot(temp_data_annual, aes(x = Année, y = Temp_Moyenne_Region, group = Régio
 
 ------------------------------------------------------------------------
 
-### *Interprétation Géographique Approfondie :*\
+### *Interprétation Géographique Approfondie :* 
 
-Les différences observées dans les pentes régionales peuvent s’expliquer par divers facteurs géographiques et climatiques. Par exemple, la **proximité de l’océan** tend à modérer les écarts de température, contribuant à des tendances plus stables dans des régions telles que la Bretagne ou la Normandie. 
+Les différences observées dans les pentes régionales peuvent s’expliquer par divers facteurs géographiques et climatiques. Par exemple, la **proximité de l’océan** tend à modérer les écarts de température, contribuant à des tendances plus stables dans des régions telles que la Bretagne ou la Normandie.
 
-L’**altitude** joue également un rôle clé : dans les régions montagneuses (comme l’Auvergne-Rhône-Alpes), l’air plus froid en altitude limite l’élévation des températures, mais n’empêche pas une tendance au réchauffement, parfois même plus marquée que dans les zones de plaine. 
+L’**altitude** joue également un rôle clé : dans les régions montagneuses (comme l’Auvergne-Rhône-Alpes), l’air plus froid en altitude limite l’élévation des températures, mais n’empêche pas une tendance au réchauffement, parfois même plus marquée que dans les zones de plaine.
 
 Enfin, la **latitude** influe sur la durée et l’intensité de l’ensoleillement, pouvant également façonner la réponse régionale au réchauffement climatique. Ces facteurs combinés dessinent un tableau complexe, où l’évolution des températures dépend non seulement des tendances globales, mais aussi des spécificités locales.
 
