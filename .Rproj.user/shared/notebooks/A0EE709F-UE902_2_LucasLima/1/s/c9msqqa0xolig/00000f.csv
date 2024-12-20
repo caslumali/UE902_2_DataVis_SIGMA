@@ -1,0 +1,5 @@
+"0","#| echo: false"
+"0","#| results: ""hide"""
+"0","## Chargement des shapefiles ----"
+"0","shp_departements <- vect(list.files(ROI_FOLDER, pattern = ""DEPARTEMENT.*\\.shp$"", full.names = TRUE))"
+"0","shp_regions <- vect(list.files(ROI_FOLDER, pattern = ""REGION.*\\.shp$"", full.names = TRUE))"

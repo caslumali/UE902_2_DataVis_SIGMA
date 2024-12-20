@@ -1,0 +1,23 @@
+body {
+  background-color: #121212; /* Fond noir profond */
+  color: #e0e0e0; /* Texte gris clair */
+}
+
+a {
+  color: #8ab4f8; /* Liens bleus doux */
+}
+
+pre, code {
+  background-color: #1e1e1e; /* Fond sombre pour les blocs de code */
+  color: #f8f8f2; /* Texte clair pour les blocs de code */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #f8f8f2; /* Titres en blanc */
+}
+
+table {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
