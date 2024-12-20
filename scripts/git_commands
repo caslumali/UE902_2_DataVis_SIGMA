@@ -1,0 +1,13 @@
+# Adiciona e faz commit do HTML editado
+git add .
+git commit -m "Edit HTML file"
+
+# Move o arquivo HTML diretamente para a pasta docs
+mv scripts/UE902_2_LucasLima.html docs/
+
+# Adiciona e faz commit da mudança de pasta
+git add docs/UE902_2_LucasLima.html
+git commit -m "Move HTML file to docs folder for GitHub Pages"
+
+# Envia tudo para o GitHub
+git push origin main
