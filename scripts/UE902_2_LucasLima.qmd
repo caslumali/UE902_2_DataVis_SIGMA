@@ -1,6 +1,8 @@
 ---
 title: "UE902_2 - Variabilité des températures en France"
 author: "Lucas Lima"
+number-sections: true
+include-after-body: "footer.html"
 format:
   html:
     theme: darkly
@@ -70,6 +72,7 @@ suppressPackageStartupMessages({
   library(terra)
   library(gtools)
   library(ggplot2)
+  library(plotly)
   library(magick)
   library(dplyr)
   library(tidyr)
@@ -989,8 +992,8 @@ p <- ggplot(temp_region, aes(x = Temp_Min, y = Temp_Max, color = Région, shape 
     axis.title.y = element_text(size = 18, face = "bold", color = "white", margin = margin(r = 15)),
     
     axis.text = element_text(size = 14, color = "white"),
-    legend.title = element_text(size = 12, face = "bold", color = "white"),
-    legend.text = element_text(size = 12, color = "white"),
+    legend.title = element_text(size = 14, face = "bold", color = "white"),
+    legend.text = element_text(size = 14, color = "white"),
     legend.background = element_blank(),
     legend.key = element_blank()
   )
@@ -1000,8 +1003,6 @@ ggsave("results/Scatter_Temp_Max_Min_Formes.png", bg = "#2C2C2C", plot = p, widt
 
 # Afficher le graphique ----
 p
-
-
 ```
 
 ## **Principales Observations :**

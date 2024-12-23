@@ -21,3 +21,25 @@ table {
   color: #e0e0e0;
   border: 1px solid #444;
 }
+
+/* Espacement par défaut pour tous les titres */
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 84px; /* Espacement par défaut */
+}
+
+/* Espacement plus grand entre h1 et h2 */
+h1 + h2, .h1 + .h2 {
+    margin-top: 120px; /* Espacement plus grand entre h1 et h2 */
+}
+
+/* Espacement plus petit entre h2 et h3 */
+h2 + h3, .h2 + .h3 {
+    margin-top: 48px; /* Espacement plus petit entre h2 et h3 */
+}
+
+
+<style>
+figcaption {
+    text-align: center;
+}
+</style>
