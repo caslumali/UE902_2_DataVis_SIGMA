@@ -36,10 +36,3 @@ h1 + h2, .h1 + .h2 {
 h2 + h3, .h2 + .h3 {
     margin-top: 48px; /* Espacement plus petit entre h2 et h3 */
 }
-
-
-<style>
-figcaption {
-    text-align: center;
-}
-</style>

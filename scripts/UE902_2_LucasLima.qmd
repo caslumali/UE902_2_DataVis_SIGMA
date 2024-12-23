@@ -7,7 +7,7 @@ include-after-body: "footer.html"
 format:
   html:
     theme: darkly
-    css: ./styles.css
+    css: styles.css
     toggle: true
     toc: true  
     code-fold: true  
