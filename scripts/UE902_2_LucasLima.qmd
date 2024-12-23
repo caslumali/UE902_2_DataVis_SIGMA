@@ -1,5 +1,6 @@
 ---
-title: "UE902_2 - Variabilité des températures en France"
+title: "Analyse de la variabilité des températures en France"
+subtitle: "dans les deux dernières décennies (2004-2023)"
 author: "Lucas Lima"
 number-sections: true
 include-after-body: "footer.html"
@@ -13,6 +14,7 @@ format:
     self-contained: true  
 execute:
   freeze: auto
+description: "Projet de l'UE 902_2 Data Visualisation du M2 SIGMA UT2/ENSAT"
 ---
 
 # **Introduction**
