@@ -31,7 +31,7 @@ L'objectif de ce projet est de présenter l'évolution des températures en Fran
 
 ------------------------------------------------------------------------
 
-## **Les six visualisations proposées sont :**
+## **Les six visualisations proposées**
 
 1.  **Carte Animée (GIF) des Températures Moyennes Annuelles (2004-2023)**\
     Une visualisation dynamique montrant l’évolution des températures moyennes annuelles en France, année après année, en mettant en évidence les variations spatiales et l’impact de la topographie.
@@ -321,7 +321,7 @@ cat("\nGIF ajusté créé avec succès et sauvegardé dans 'results/Carte_Temper
 knitr::include_graphics("results/Carte_Temperatures_Moyennes.gif")
 ```
 
-## **Principales Observations :**
+## **Principales Observations**
 
 -   **Régions Montagneuses** :\
     Les zones telles que les **Alpes**, les **Pyrénées**, le **Massif Central** et les montagnes **corses** apparaissent systématiquement plus **froides** (teintes bleues). Cela est dû à leur **altitude élevée**, qui réduit les températures moyennes.
@@ -335,7 +335,7 @@ knitr::include_graphics("results/Carte_Temperatures_Moyennes.gif")
 -   **Variabilité Temporelle** :\
     Bien que les températures varient légèrement d'une année à l'autre, on observe une **tendance générale au réchauffement**, avec une **progression des températures moyennes plus élevées** vers le **centre-nord** et le **nord-est** de la France.
 
-## **Détails Techniques :**
+## **Détails Techniques**
 
 Les étapes clés du traitement des données incluent :
 
@@ -359,7 +359,7 @@ Ce graphique montre la **distribution des températures mensuelles** agrégées 
 raster_temp_mean <- rast(stringr::str_glue("{OUT_FOLDER}/TerraClimate_Mean.tif"))
 
 # Obtenir le nombre total de couches et d'années
-total_layers <- nlyr(raster_temp_mean) # Total de camadas (240)
+total_layers <- nlyr(raster_temp_mean) # Total de couches (240)
 total_years <- 20                     # 20 ans (2004-2023)
 months_per_year <- 12                 # 12 mois par an
 
@@ -484,7 +484,7 @@ ggsave(filename = stringr::str_glue("{PLOT_FOLDER}/Ridgeline_Temp_Mensuelles.png
 
 ```
 
-## **Principales Observations :**
+## **Principales Observations**
 
 -   **Variabilité Saisonnière Marquée :** Chaque courbe représente la distribution des températures pour l’ensemble du territoire sur l’ensemble des 20 années, pour un mois donné (tous les janvier confondus, tous les février confondus, etc.). Les différences marquées entre les mois d’hiver et d’été révèlent la nette saisonnalité du climat français.
 
@@ -494,7 +494,7 @@ ggsave(filename = stringr::str_glue("{PLOT_FOLDER}/Ridgeline_Temp_Mensuelles.png
 
 -   **Stabilité Relative de Certains Mois :** À l’inverse, certains mois présentent des distributions plus concentrées, indiquant une relative stabilité des températures au fil des ans.
 
-## **Détails Techniques :**
+## **Détails Techniques**
 
 -   **Agrégation et Transformation :**\
     Les valeurs mensuelles ont été moyennées spatialement pour obtenir une série temporelle de températures mensuelles moyennes à l’échelle nationale. Ensuite, les distributions de ces températures (tous pixels et toutes les années confondus) ont été visualisées.
@@ -658,7 +658,7 @@ cat("\nGIF des anomalies créé avec succès dans 'results/Anomalies_Temporelles
 knitr::include_graphics("results/Anomalies_Temporelles.gif")
 ```
 
-## **Principales Observations :**
+## **Principales Observations**
 
 -   **Répartition Spatiale :**\
     Une tendance nette au **réchauffement climatique** se dessine avec une transition progressive des teintes **bleues** (anomalies froides) vers des teintes **rouges** (anomalies chaudes), marquant des températures **plus élevées** sur l'ensemble du territoire.
@@ -671,7 +671,7 @@ knitr::include_graphics("results/Anomalies_Temporelles.gif")
 
 ------------------------------------------------------------------------
 
-## **Détails Techniques :**
+## **Détails Techniques**
 
 Les étapes clés du traitement des données incluent :
 
@@ -689,7 +689,7 @@ Les étapes clés du traitement des données incluent :
 
 ------------------------------------------------------------------------
 
-### *Perspectives complémentaires :*
+### *Perspectives complémentaires*
 
 Cette carte des anomalies met en avant l’évolution spatiale du réchauffement sur les deux dernières décennies. . Pour approfondir cette analyse, le **Ridgeline Plot** présenté précédemment offre une perspective temporelle et statistique plus fine, en montrant la répartition des températures mensuelles au fil des ans.
 
@@ -814,7 +814,7 @@ p_moyennes
 
 ```
 
-## **Principales Observations :**
+## **Principales Observations**
 
 - **Hiver (Bleu) :**  
     Le **slope** montre que l'hiver est la saison ayant la **tendance linéaire la plus marquée**, avec une augmentation significative des températures moyennes au fil du temps. Cela suggère un réchauffement notable pour cette saison.
@@ -830,7 +830,7 @@ p_moyennes
 
 ------------------------------------------------------------------------
 
-## **Détails Techniques :**
+## **Détails Techniques**
 
 Les étapes clés de l’analyse comprennent :  
 
@@ -1007,7 +1007,7 @@ ggsave("results/Scatter_Temp_Max_Min_Formes.png", bg = "#2C2C2C", plot = p, widt
 p
 ```
 
-## **Principales Observations :**
+## **Principales Observations**
 
 -   **Corrélation Positive Générale :**\
     Une **relation linéaire positive** est visible entre les températures maximales et minimales moyennes. Les régions ayant des températures minimales plus élevées présentent également des températures maximales plus élevées.
@@ -1020,10 +1020,10 @@ p
     -   Les régions du **Sud** de la France, comme la **Provence-Alpes-Côte d'Azur** et l'**Occitanie**, montrent des températures **plus élevées**, avec des points situés dans la partie supérieure droite du graphique.
     -   Les régions **montagneuses** et **nordiques**, telles que **Auvergne-Rhône-Alpes** et les **Hauts-de-France**, présentent des températures plus **basses**, situées dans la partie inférieure gauche.
 
--   **Comparaison entre Décennies :**\
+-   **Comparaison entre Décennies**\
     En comparant les deux formes de points, on observe dans certaines régions une **réduction de l'amplitude thermique** (écart entre les températures maximales et minimales), tandis que d'autres montrent une **augmentation notable**, probablement en raison de facteurs climatiques spécifiques.
 
-## **Détails Techniques :**
+## **Détails Techniques**
 
 1.  **Extraction des Températures Maximales et Minimales :**\
     Les températures moyennes **maximales** et **minimales** ont été extraites pour chaque année et chaque région en utilisant les données **TerraClimate**. Cette étape a été réalisée grâce à des opérations sur les rasters climatiques et les shapefiles des régions françaises.
@@ -1169,7 +1169,7 @@ ggplot(temp_data_annual, aes(x = Année, y = Temp_Moyenne_Region, group = Régio
 
 ```
 
-## **Principales observations :**
+## **Principales observations**
 
 1.  **Tendance Générale au Réchauffement :**\
     Toutes les régions montrent une **augmentation des températures moyennes** sur la période étudiée. Les pentes positives confirment une tendance linéaire ascendante.
@@ -1186,7 +1186,7 @@ ggplot(temp_data_annual, aes(x = Année, y = Temp_Moyenne_Region, group = Régio
 
 ------------------------------------------------------------------------
 
-## **Interprétation Géographique Approfondie :**
+## **Interprétation Géographique Approfondie**
 
 Les différences observées dans les pentes régionales peuvent s’expliquer par divers facteurs géographiques et climatiques. Par exemple, la **proximité de l’océan** tend à modérer les écarts de température, contribuant à des tendances plus stables dans des régions telles que la Bretagne ou la Normandie.
 
@@ -1196,7 +1196,7 @@ Enfin, la **latitude** influe sur la durée et l’intensité de l’ensoleillem
 
 ------------------------------------------------------------------------
 
-## **Détails Techniques :**
+## **Détails Techniques**
 
 1.  **Extraction des Températures Régionales :**
     -   Les données proviennent des rasters de températures moyennes traités pour la France.
