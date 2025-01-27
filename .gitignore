@@ -6,3 +6,9 @@ paths
 *.pper
 *.prop
 git_commands.md
+
+*.tif
+*.gif
+*.png
+*.PNG
+*.docx
