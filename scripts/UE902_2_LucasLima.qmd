@@ -17,7 +17,7 @@ execute:
 description: "Projet de l'UE 902_2 Data Visualisation du M2 SIGMA UT2/ENSAT"
 ---
 
-# **Introduction**
+# Introduction
 
 Cette page interactive constitue le projet final de l'UE902_2 *Visualisation de Données* du **M2 SIGMA** (Université Toulouse 2 Jean Jaurès / ENSAT-INP).
 
@@ -31,7 +31,7 @@ L'objectif de ce projet est de présenter l'évolution des températures en Fran
 
 ------------------------------------------------------------------------
 
-## **Les six visualisations proposées**
+## Les six visualisations proposées
 
 1.  **Carte Animée (GIF) des Températures Moyennes Annuelles (2004-2023)**\
     Une visualisation dynamique montrant l’évolution des températures moyennes annuelles en France, année après année, en mettant en évidence les variations spatiales et l’impact de la topographie.
@@ -53,7 +53,7 @@ L'objectif de ce projet est de présenter l'évolution des températures en Fran
 
 ------------------------------------------------------------------------
 
-# **Méthodologie**
+# Méthodologie
 
 Les données **TerraClimate** ont été téléchargées depuis **Google Earth Engine (GEE)** à l’aide de trois scripts *JavaScript*. Les données obtenues incluent les températures **maximales**, **moyennes** et **minimales** pour l’ensemble du territoire français. Ces données climatiques sont disponibles mensuellement depuis **1958** avec une résolution spatiale de **4638,3 mètres**.
 
@@ -63,7 +63,7 @@ Une première phase de **prétraitement** a été réalisée pour organiser les 
 
 Le **shapefile** utilisé pour les traitements géographiques concerne uniquement les **régions administratives françaises**.
 
-Une fois les données préparées, tous les **géotraitements** ont été effectués et les visualisations ont été intégrées dans une page HTML interactive. Cette dernière a été hébergée sur un **dépôt GitHub** pour permettre son partage et sa consultation en ligne.
+Une fois les données préparées, tous les **géotraitements** ont été effectués et les visualisations ont été intégrées dans une page HTML interactive. Cette dernière a été hébergée sur un **Always Data** pour permettre son partage et sa consultation en ligne.
 
 ------------------------------------------------------------------------
 
@@ -74,6 +74,7 @@ suppressPackageStartupMessages({
   library(terra)
   library(gtools)
   library(ggplot2)
+  library(purrr)
   library(plotly)
   library(magick)
   library(dplyr)
@@ -212,7 +213,7 @@ cat("\nPré-traitement des rasters terminé avec succès !\n")
 
 ```
 
-# **Carte des températures annuelles moyennes en France de 2004 à 2023**
+# Carte des températures annuelles moyennes en France de 2004 à 2023
 
 La carte animée ci-dessous présente l'évolution des **températures moyennes annuelles** en France de **2004 à 2023**. Chaque image représente la **moyenne des 12 mois** pour une année donnée, ce qui permet de visualiser les **changements climatiques** sur deux décennies.
 
@@ -321,7 +322,7 @@ cat("\nGIF ajusté créé avec succès et sauvegardé dans 'results/Carte_Temper
 knitr::include_graphics("results/Carte_Temperatures_Moyennes.gif")
 ```
 
-## **Principales Observations**
+## Principales Observations
 
 -   **Régions Montagneuses** :\
     Les zones telles que les **Alpes**, les **Pyrénées**, le **Massif Central** et les montagnes **corses** apparaissent systématiquement plus **froides** (teintes bleues). Cela est dû à leur **altitude élevée**, qui réduit les températures moyennes.
@@ -335,7 +336,7 @@ knitr::include_graphics("results/Carte_Temperatures_Moyennes.gif")
 -   **Variabilité Temporelle** :\
     Bien que les températures varient légèrement d'une année à l'autre, on observe une **tendance générale au réchauffement**, avec une **progression des températures moyennes plus élevées** vers le **centre-nord** et le **nord-est** de la France.
 
-## **Détails Techniques**
+## Détails Techniques
 
 Les étapes clés du traitement des données incluent :
 
@@ -347,7 +348,7 @@ Les étapes clés du traitement des données incluent :
 
 ------------------------------------------------------------------------
 
-# **Ridgeline Plot : Températures Mensuelles en France (2004-2023)**
+# Ridgeline Plot : Températures Mensuelles en France (2004-2023)
 
 Ce graphique montre la **distribution des températures mensuelles** agrégées sur les **20 dernières années** pour toute la France. Chaque ligne correspond à un mois de l’année (de janvier à décembre), permettant de comparer les distributions mensuelles de manière intuitive.
 
@@ -484,17 +485,17 @@ ggsave(filename = stringr::str_glue("{PLOT_FOLDER}/Ridgeline_Temp_Mensuelles.png
 
 ```
 
-## **Principales Observations**
+## Principales Observations
 
--   **Variabilité Saisonnière Marquée :** Chaque courbe représente la distribution des températures pour l’ensemble du territoire sur l’ensemble des 20 années, pour un mois donné (tous les janvier confondus, tous les février confondus, etc.). Les différences marquées entre les mois d’hiver et d’été révèlent la nette saisonnalité du climat français.
+-   **Variabilité Saisonnière Marquée :** Chaque courbe représente la distribution des températures pour l’ensemble du territoire sur l’ensemble des 20 années, pour un mois donné (tous les janvier confondus, tous les février confondus, etc.). Les écarts prononcés entre les mois d’hiver et d’été soulignent la forte saisonnalité du climat français.
 
--   **Transitions Progressives entre les Saisons :** L’évolution de la forme et de la position des courbes de densité d’un mois à l’autre montre clairement la progression saisonnière, du froid hivernal à la chaleur estivale, puis la redescente en automne.
+-   **Transitions Progressives entre les Saisons :** L’évolution de la forme et de la position des courbes de densité d’un mois à l’autre reflète clairement la transition saisonnière, passant du froid hivernal à la chaleur estivale, avant de redescendre en automne.
 
--   **Hétérogénéité Statistique :** Certains mois affichent une distribution plus étalée, suggérant une variabilité interannuelle importante (par exemple, des étés parfois très chauds ou des mois de printemps plus imprévisibles).
+-   **Hétérogénéité Statistique :** Certains mois montrent une distribution plus large, traduisant une variabilité interannuelle importante (par exemple, des étés exceptionnellement chauds ou des printemps plus imprévisibles).
 
--   **Stabilité Relative de Certains Mois :** À l’inverse, certains mois présentent des distributions plus concentrées, indiquant une relative stabilité des températures au fil des ans.
+-   **Stabilité Relative de Certains Mois :** À l’inverse, des mois affichent des distributions plus resserrées, indiquant une relative stabilité des températures au fil des années.
 
-## **Détails Techniques**
+## Détails Techniques
 
 -   **Agrégation et Transformation :**\
     Les valeurs mensuelles ont été moyennées spatialement pour obtenir une série temporelle de températures mensuelles moyennes à l’échelle nationale. Ensuite, les distributions de ces températures (tous pixels et toutes les années confondus) ont été visualisées.
@@ -507,7 +508,7 @@ ggsave(filename = stringr::str_glue("{PLOT_FOLDER}/Ridgeline_Temp_Mensuelles.png
 
 ------------------------------------------------------------------------
 
-# **Carte des anomalies de températures annuelles en France (2004-2023)**
+# Carte des anomalies de températures annuelles en France (2004-2023)
 
 La carte animée ci-dessous présente les **anomalies de températures annuelles** en France entre **2004 et 2023**. Les anomalies sont calculées en comparant les températures moyennes annuelles à une **moyenne de référence** sur la période complète (2004-2023). Cette approche permet de **détecter et visualiser** les écarts par rapport à la normale climatique.
 
@@ -658,7 +659,7 @@ cat("\nGIF des anomalies créé avec succès dans 'results/Anomalies_Temporelles
 knitr::include_graphics("results/Anomalies_Temporelles.gif")
 ```
 
-## **Principales Observations**
+## Principales Observations
 
 -   **Répartition Spatiale :**\
     Une tendance nette au **réchauffement climatique** se dessine avec une transition progressive des teintes **bleues** (anomalies froides) vers des teintes **rouges** (anomalies chaudes), marquant des températures **plus élevées** sur l'ensemble du territoire.
@@ -669,9 +670,8 @@ knitr::include_graphics("results/Anomalies_Temporelles.gif")
 -   **Extrêmes Marqués :**\
     Le début de la période révèle quelques **anomalies négatives** (teintes bleues), tandis que les années récentes montrent une **progression constante** des **anomalies positives** (teintes rouges), illustrant un contraste frappant au fil des décennies.
 
-------------------------------------------------------------------------
 
-## **Détails Techniques**
+## Détails Techniques**
 
 Les étapes clés du traitement des données incluent :
 
@@ -689,7 +689,7 @@ Les étapes clés du traitement des données incluent :
 
 ------------------------------------------------------------------------
 
-### *Perspectives complémentaires*
+### Perspectives complémentaires
 
 Cette carte des anomalies met en avant l’évolution spatiale du réchauffement sur les deux dernières décennies. . Pour approfondir cette analyse, le **Ridgeline Plot** présenté précédemment offre une perspective temporelle et statistique plus fine, en montrant la répartition des températures mensuelles au fil des ans.
 
@@ -697,7 +697,7 @@ De plus, l’analyse des **tendances saisonnières** illustrées ci-dessous perm
 
 ------------------------------------------------------------------------
 
-# **Analyse des tendances saisonnières**
+# Analyse des tendances saisonnières
 
 Le graphique ci-dessous présente l’**évolution des températures moyennes saisonnières** en France entre **2004 et 2023**. Contrairement aux anomalies, ces moyennes annuelles permettent d’examiner directement les variations climatiques des saisons au fil du temps. Les mois ont été regroupés en **quatre saisons climatiques** pour une analyse plus précise :
 
@@ -777,60 +777,80 @@ cat("Le DataFrame des moyennes saisonnières annuelles a été sauvegardé avec 
 # Charger les données sauvegardées
 moyenne_saison <- readRDS(stringr::str_glue("{PLOT_FOLDER}/moyenne_saison_annuelle.rds"))
 
+# Calculer la pente (coefficient de régression linéaire) pour chaque saison
+pentes <- moyenne_saison %>%
+  group_by(Saison) %>%
+  summarize(pente = coef(lm(Temp_Moyenne_Annuelle ~ Année, data = pick(everything())))[2])
+
+# Créer des étiquettes formatées pour la légende (nom de la saison et pente sur deux lignes)
+labels_legenda <- pentes %>%
+  mutate(label = paste0(Saison, "\n(", round(pente, 3), "°C/an)")) %>%
+  pull(label)
+
+# Associer les étiquettes formatées aux saisons
+names(labels_legenda) <- pentes$Saison
+
+# Créer le graphique des moyennes saisonnières
 p_moyennes <- ggplot(moyenne_saison, aes(x = Année, y = Temp_Moyenne_Annuelle, color = Saison, group = Saison)) +
-  geom_line(linewidth = 1.5) +  
-  geom_point(size = 2) +  
-  geom_smooth(method = "lm", formula = y ~ x, se = FALSE, linetype = "dashed", linewidth = 0.8) +
-  scale_color_manual(values = c("Hiver" = "#4575B4", "Printemps" = "#74ADD1", 
-                                "Été" = "#F46D43", "Automne" = "#FEE090")) +
-  labs(
-    title = "Évolution des Moyennes de Température par Saison (2004-2023)",
-    subtitle = "Tendances des moyennes saisonnières au fil des années",
-    x = "Année",
-    y = "Température Moyenne (°C)",
-    color = "Saison"
+  geom_line(linewidth = 1.5) +  # Ajouter les lignes pour chaque saison
+  geom_point(size = 2) +  # Ajouter les points pour chaque observation
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE, linetype = "dashed", linewidth = 0.8) +  # Ajouter une tendance
+  scale_color_manual(
+    values = c("Hiver" = "#5499c7", "Printemps" = "#229954", "Été" = "#cb4335", "Automne" = "#eb984e"),
+    labels = labels_legenda,  # Utiliser les étiquettes personnalisées
+    limits = c("Été", "Automne", "Printemps", "Hiver")  # Réorganiser l'ordre des saisons dans la légende
   ) +
-  theme_minimal(base_size = 16) +
+  labs(
+    title = "Évolution des Moyennes de Température par Saison (2004-2023)",  
+    subtitle = "Tendances des moyennes saisonnières au fil des années",      
+    x = "Année",                                                             
+    y = "Température Moyenne (°C)",                                          
+    color = "Saison"                                                         
+  ) +
+  theme_minimal(base_size = 16) +  # Appliquer un thème minimal
   theme(
-    plot.background = element_rect(fill = "#2C2C2C", color = NA),
-    panel.background = element_rect(fill = "#2C2C2C", color = NA),
-    panel.grid.major = element_line(color = "#444444", linewidth = 0.2),
-    panel.grid.minor = element_line(color = "#444444", linewidth = 0.1),
-    plot.title = element_text(size = 22, face = "bold", hjust = 0.5, color = "white"),
-    plot.subtitle = element_text(size = 18, hjust = 0.5, color = "white"),
-    axis.title.y = element_text(face = "bold", size = 18, color = "white", 
-                                margin = margin(r = 10)),  
-    axis.title.x = element_text(face = "bold", size = 18, color = "white", 
-                                margin = margin(t = 10)),
-    axis.text = element_text(size = 18, color = "white"),
+    plot.background = element_rect(fill = "#2C2C2C", color = NA),  
+    panel.background = element_rect(fill = "#2C2C2C", color = NA), 
+    panel.grid.major = element_line(color = "#444444", linewidth = 0.2),  
+    panel.grid.minor = element_line(color = "#444444", linewidth = 0.1),  
+    plot.title = element_text(size = 22, face = "bold", hjust = 0.5, color = "white"), 
+    plot.subtitle = element_text(size = 18, hjust = 0.5, color = "white"),             
+    axis.title.y = element_text(face = "bold", size = 18, color = "white",
+                                margin = margin(r = 10)),                              
+    axis.title.x = element_text(face = "bold", size = 18, color = "white",
+                                margin = margin(t = 10)),                              
+    axis.text = element_text(size = 18, color = "white"),                              
     legend.title = element_text(size = 16, face = "bold", color = "white"),
-    legend.text = element_text(size = 16, color = "white"),
-    legend.background = element_rect(fill = "#2C2C2C", color = NA)
+    legend.key.height = unit(3, "lines"), 
+    legend.text = element_text(size = 14, color = "white"),                            
+    legend.background = element_rect(fill = "#2C2C2C", color = NA)                     
   )
 
-# Salvar e mostrar o gráfico
+# Sauvegarder le graphique en tant qu'image
 ggsave("results/Evolution_Moyennes_Saisons.png", bg = "#2C2C2C", plot = p_moyennes, width = 14, height = 8, dpi = 300)
-p_moyennes
 
+# Afficher le graphique
+p_moyennes
 ```
 
-## **Principales Observations**
+
+## Principales Observations
 
 - **Hiver (Bleu) :**  
-    Le **slope** montre que l'hiver est la saison ayant la **tendance linéaire la plus marquée**, avec une augmentation significative des températures moyennes au fil du temps. Cela suggère un réchauffement notable pour cette saison.
+    Avec une pente de **0.12°C/an** l'hiver est la saison ayant la **tendance linéaire la plus marquée**, avec une augmentation significative des températures moyennes au fil du temps. Cela suggère un réchauffement notable pour cette saison.
 
 - **Été (Rouge) :**  
-    Le **slope** de l'été est également élevé, indiquant un **réchauffement significatif**, mais légèrement moins accentué que pour l'hiver.
+    Avec une pente de **0.094°C/an**, l'été présente également une tendance de réchauffement notable, mais légèrement moins accentué que pour l'hiver. Ce réchauffement peut amplifier les vagues de chaleur et leurs impacts au fil du temps.
 
 - **Automne (Jaune) :**  
-    L'automne montre une **tendance modérée**, avec un réchauffement progressif mais moins prononcé que pour l'été et l'hiver.
+    L'automne montre une **tendance modérée**, avec une pente de **0.058°C/an** et un réchauffement progressif mais moins prononcé que pour l'été et l'hiver.
 
 - **Printemps (Bleu clair) :**  
-    Le printemps a le **slope le plus faible**, indiquant que cette saison est la **moins impactée** en termes de réchauffement sur la période étudiée.
+    Le printemps a le **slope le plus faible**, indiquant que cette saison est la **moins impactée** en termes de réchauffement.
 
 ------------------------------------------------------------------------
 
-## **Détails Techniques**
+## Détails Techniques
 
 Les étapes clés de l’analyse comprennent :  
 
@@ -850,7 +870,7 @@ Les étapes clés de l’analyse comprennent :
 
 ------------------------------------------------------------------------
 
-# **Scatter Plot de l'Amplitude Thermique par Région**
+# Scatter Plot de l'Amplitude Thermique par Région
 
 Le graphique de dispersion ci-dessous illustre la **relation entre les températures maximales et minimales moyennes annuelles** pour chaque **région française** entre **2004 et 2023**. Chaque point représente une **année donnée** dans une région spécifique, tandis que la **couleur des points** permet de distinguer les régions françaises et que **la forme des points** différencie les **deux décennies** analysées :\
 - **Cercle** : Années **2004-2013**\
@@ -959,13 +979,26 @@ temp_region <- temp_region %>%
 
 # Palette de couleurs personnalisée (13 couleurs uniques) ----
 couleurs_regions <- c(
-  "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", 
-  "#a6761d", "#666666", "#1f78b4", "#33a02c", "#fb9a99", "#b15928", "#fdbf6f"
+  "Auvergne-Rhône-Alpes" = "#00FFFF",       # Ciano brilhante
+  "Bretagne" = "#FF4500",                   # Laranja queimado
+  "Bourgogne-Franche-Comté" = "#FFD700",    # Dourado
+  "Centre-Val de Loire" = "#FF0000",        # Verde claro
+  "Corse" = "#FF1493",                      # Rosa choque
+  "Grand Est" = "#1E90FF",                  # Azul real
+  "Hauts-de-France" = "#ADFF2F",            # Verde lima
+  "Île-de-France" = "#FF6347",              # Tomate
+  "Normandie" = "#8A2BE2",                  # Roxo
+  "Nouvelle-Aquitaine" = "#FF00FF",         # Magenta
+  "Occitanie" = "#FFFFFF",                  # Verde chartreuse
+  "Pays de la Loire" = "#8B4513",           # Marrom sela
+  "Provence-Alpes-Côte d'Azur" = "#87CEEB"  # Azul céu
 )
+
+
 
 # Création du scatter plot avec forme différente pour chaque décennie ----
 p <- ggplot(temp_region, aes(x = Temp_Min, y = Temp_Max, color = Région, shape = Décennie)) +
-  geom_point(alpha = 0.8, size = 4) +  # Points avec transparence et taille optimisée
+  geom_point(alpha = 0.6, size = 4) +  # Points avec transparence et taille optimisée
   scale_color_manual(values = couleurs_regions) +  # Palette de couleurs pour les régions
   scale_shape_manual(values = c(16, 17)) +  # Formes : cercle (16) pour 2004-2013 et triangle (17) pour 2014-2023
   labs(
@@ -1007,40 +1040,37 @@ ggsave("results/Scatter_Temp_Max_Min_Formes.png", bg = "#2C2C2C", plot = p, widt
 p
 ```
 
-## **Principales Observations**
+## Principales Observations
 
--   **Corrélation Positive Générale :**\
-    Une **relation linéaire positive** est visible entre les températures maximales et minimales moyennes. Les régions ayant des températures minimales plus élevées présentent également des températures maximales plus élevées.
+Bien que ce graphique puisse sembler confus en raison de la superposition des points, certaines tendances intéressantes peuvent être mises en évidence.  
 
--   **Évolution des Décennies :**
-    -   Les points **triangulaires** (2014-2023) tendent à se décaler légèrement vers la **droite** et vers le **haut** du graphique, suggérant une augmentation des températures minimales et maximales moyennes par rapport à la décennie précédente (2004-2013).
-    -   Cela pourrait indiquer un **réchauffement climatique** dans plusieurs régions françaises.
+- **Corrélation Positive Générale :**  
+  Une **relation linéaire positive** est observée entre les températures maximales et minimales moyennes. Les régions ayant des températures minimales plus élevées présentent également des températures maximales plus élevées.  
 
--   **Variabilité Régionale :**
-    -   Les régions du **Sud** de la France, comme la **Provence-Alpes-Côte d'Azur** et l'**Occitanie**, montrent des températures **plus élevées**, avec des points situés dans la partie supérieure droite du graphique.
-    -   Les régions **montagneuses** et **nordiques**, telles que **Auvergne-Rhône-Alpes** et les **Hauts-de-France**, présentent des températures plus **basses**, situées dans la partie inférieure gauche.
+- **Évolution des Décennies :**  
+  - Les points **triangulaires** (2014-2023) se décalent légèrement vers la **droite** et vers le **haut** du graphique, suggérant une augmentation des températures minimales et maximales moyennes par rapport à la décennie précédente (2004-2013).  
+  - Cette tendance est particulièrement marquée en **Corse, Nouvelle-Aquitaine, Occitanie et Bretagne**, où les étés ont été plus chauds (**présence accrue de triangles en haut**) et les hivers caractérisés par des températures minimales plus élevées (**triangles plus nombreux à droite**).  
 
--   **Comparaison entre Décennies**\
-    En comparant les deux formes de points, on observe dans certaines régions une **réduction de l'amplitude thermique** (écart entre les températures maximales et minimales), tandis que d'autres montrent une **augmentation notable**, probablement en raison de facteurs climatiques spécifiques.
 
-## **Détails Techniques**
+## **Détails Techniques**  
 
-1.  **Extraction des Températures Maximales et Minimales :**\
-    Les températures moyennes **maximales** et **minimales** ont été extraites pour chaque année et chaque région en utilisant les données **TerraClimate**. Cette étape a été réalisée grâce à des opérations sur les rasters climatiques et les shapefiles des régions françaises.
+1. **Extraction des Températures Maximales et Minimales :**  
+   Les températures moyennes **maximales** et **minimales** ont été extraites pour chaque année et chaque région à partir des données **TerraClimate**. Cette étape a été réalisée via des opérations sur les rasters climatiques et les shapefiles des régions françaises.  
 
-2.  **Agrégation des Moyennes Régionales :**\
-    Les valeurs ont été moyennées au niveau de chaque région pour assurer une analyse cohérente et faciliter la comparaison entre les régions.
+2. **Agrégation des Moyennes Régionales :**  
+   Les valeurs ont été moyennées au niveau régional afin d’assurer une analyse cohérente et de faciliter la comparaison entre les régions.  
 
-3.  **Différenciation des Décennies :**\
-    Une colonne supplémentaire a été ajoutée aux données pour identifier les années appartenant à la première décennie (**2004-2013**) et celles de la seconde décennie (**2014-2023**).
+3. **Différenciation des Décennies :**  
+   Une colonne supplémentaire a été ajoutée aux données pour distinguer les années appartenant à la première décennie (**2004-2013**) et celles de la seconde (**2014-2023**).  
 
-4.  **Visualisation des Données :**
-    -   Les **couleurs** des points permettent de distinguer les régions françaises.
-    -   Les **formes** des points (cercles et triangles) différencient les deux décennies pour faciliter la comparaison.
+4. **Visualisation des Données :**  
+   - Les **couleurs** des points permettent de différencier les régions françaises.  
+   - Les **formes** des points (**cercles et triangles**) indiquent la décennie correspondante, facilitant ainsi la comparaison temporelle.
+
 
 ------------------------------------------------------------------------
 
-# **Évolution des Températures Moyennes par Région**
+# Évolution des Températures Moyennes par Région
 
 Ce graphique illustre **l’évolution des températures moyennes annuelles** par région française entre **2004 et 2023**. Chaque facette représente une **région** regroupée par localisation géographique (Nord, Nord-Est, Centre, Sud, Ouest, Sud-Est, Sud-Ouest). Les points orange montrent les températures moyennes observées chaque année, tandis que les lignes cyan indiquent les **tendances linéaires** ajustées via une régression linéaire. La valeur de la pente de chaque tendance, affichée en **jaune**, correspond à l’**augmentation moyenne annuelle des températures** (°C/an).
 
@@ -1169,7 +1199,7 @@ ggplot(temp_data_annual, aes(x = Année, y = Temp_Moyenne_Region, group = Régio
 
 ```
 
-## **Principales observations**
+## Principales observations
 
 1.  **Tendance Générale au Réchauffement :**\
     Toutes les régions montrent une **augmentation des températures moyennes** sur la période étudiée. Les pentes positives confirment une tendance linéaire ascendante.
@@ -1184,9 +1214,8 @@ ggplot(temp_data_annual, aes(x = Année, y = Temp_Moyenne_Region, group = Régio
 4.  **Variabilité Spatiale :**\
     Les disparités entre les pentes régionales témoignent de l’**influence des caractéristiques géographiques et climatiques locales**, comme la proximité de l’océan ou l’altitude.
 
-------------------------------------------------------------------------
 
-## **Interprétation Géographique Approfondie**
+## Interprétation Géographique
 
 Les différences observées dans les pentes régionales peuvent s’expliquer par divers facteurs géographiques et climatiques. Par exemple, la **proximité de l’océan** tend à modérer les écarts de température, contribuant à des tendances plus stables dans des régions telles que la Bretagne ou la Normandie.
 
@@ -1194,23 +1223,18 @@ L’**altitude** joue également un rôle clé : dans les régions montagneuses 
 
 Enfin, la **latitude** influe sur la durée et l’intensité de l’ensoleillement, pouvant également façonner la réponse régionale au réchauffement climatique. Ces facteurs combinés dessinent un tableau complexe, où l’évolution des températures dépend non seulement des tendances globales, mais aussi des spécificités locales.
 
-------------------------------------------------------------------------
 
-## **Détails Techniques**
+## Détails Techniques
 
-1.  **Extraction des Températures Régionales :**
-    -   Les données proviennent des rasters de températures moyennes traités pour la France.
-
-    -   Les valeurs annuelles moyennes ont été **extraites** pour chaque région à l’aide de la fonction `terra::extract`.
-2.  **Agrégation Temporelle et Géographique :**
+1.  **Agrégation Temporelle et Géographique :**
     -   Les températures ont été moyennées pour chaque année et chaque région.
 
     -   Une classification géographique a été ajoutée pour regrouper les régions par localisation (Nord, Sud-Est, etc.).
-3.  **Analyse des Tendances Linéaires :**
+2.  **Analyse des Tendances Linéaires :**
     -   Une **régression linéaire** a été appliquée à chaque région pour calculer la pente (`Slope`) représentant l’**augmentation annuelle moyenne** des températures en °C/an.
 
     -   Les pentes calculées ont été **fusionnées** avec les données principales pour affichage.
-4.  **Visualisation avec ggplot2 :**
+3.  **Visualisation avec ggplot2 :**
     -   **Facettage** par région et localisation géographique pour une comparaison claire.
     -   **Points :** Données annuelles représentées en orange.
     -   **Ligne Cyan :** Régression linéaire pour chaque région.
