@@ -15,7 +15,7 @@ Ce projet est une analyse complète des **températures climatiques en France** 
 
 ---
 
-## **Visualisations**
+## **Visualisations Clés**
 
 1. **Carte Animée des Températures Moyennes** :
    - Évolution annuelle des températures moyennes en France.
