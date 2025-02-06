@@ -15,7 +15,7 @@ Ce projet est une analyse complète des **températures climatiques en France** 
 
 ---
 
-## **Visualisations Clés**
+## **Visualisations**
 
 1. **Carte Animée des Températures Moyennes** :
    - Évolution annuelle des températures moyennes en France.
@@ -45,7 +45,7 @@ Ce projet est une analyse complète des **températures climatiques en France** 
 ## **Structure du Projet**
 
 ```
-📂 Variabilité_Températures
+📂 UE902_2_DataViz
 ├── 📂 data_brut/            # Données brutes (raster et shapefiles)
 │   ├── admin/               # Shapefile des régions administratives
 │   ├── TerraClimate_Max/    # Données raster des températures maximales
